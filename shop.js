@@ -56,10 +56,7 @@ cart = [
 
 function add(id) {
     newGood = {good: goods[id], amount: 1}
-    if (cart.some(item => item.empty === true)){
-        cart.pop()
-        cart.push(newGood)
-    } else if (cart.some(item => item.good.id === id)){
+    if (cart.some(item => item.good.id === id)){
         let good = cart.find(item => item.good.id === id);
         good.amount += 1
     } else {
@@ -82,8 +79,9 @@ function clear() {
 }
 
 function total() {
-    return 'totalAmount ' + cart.reduce((sum, good) => sum + good.amount, 0) + '\n' +
-    'totalSumm ' + cart.reduce((sum, {good, amount}) => sum + good.price * amount, 0)
+    total = {totalAmount: cart.reduce((sum, good) => sum + good.amount, 0),
+    totalSumm: cart.reduce((sum, {good, amount}) => sum + good.price * amount, 0)}
+    return total
 }
 
 console.log(clear())
